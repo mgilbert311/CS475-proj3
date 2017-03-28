@@ -41,6 +41,8 @@ typedef	int32	status;		/* returned status value (OK/SYSERR)	*/
 /* AGING POLICY - Use aging policy by setting AGING to TRUE or FALSE*/
 #define AGING TRUE
 
+/* Define Quantum for use in timer */
+#define QUANTUM 10
 
 /* Boolean constants */
 
