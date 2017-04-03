@@ -64,6 +64,9 @@ void	resched(void)		// assumes interrupts are disabled
 		
 	}
 	
+	//Reset preemption timer
+	prrempt = QUANTUM;
+
 	// Context switch to next ready process
 	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
 
