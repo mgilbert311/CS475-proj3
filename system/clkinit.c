@@ -16,7 +16,8 @@ void	clkinit(void)
 	// TODO -- program the timer!
 	// 	Use Counter 0, 16-bit binary counter, rate generator mod, read/write
 	//	least significant byte first, followed by most significant byte
-	outb(CLKCNTL, 00110100b);
+	//We had b at the end of that
+	outb(CLKCNTL, 00110100);
 
 	// TODO -- set initial value of the countdown!
 	//	clock rate is 1.193 Mhz (ticks per second). We want to set countdown in such a way that
@@ -25,7 +26,7 @@ void	clkinit(void)
 
 	// TODO -- Now program the initial value for countdown
 	// 	must write in two operations
-	outb(CLOCK0, (char) (countdown & 0xff);	//write least significant byte of countdown
+	outb(CLOCK0, (char) (countdown & 0xff));	//write least significant byte of countdown
 	outb(CLOCK0, (char) ((countdown >> 8) & 0xff));	//write most significant byte of countdown
 
 

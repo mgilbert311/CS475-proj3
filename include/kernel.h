@@ -26,7 +26,7 @@ typedef	byte	bool8;		/* Boolean type				*/
 typedef	uint16	intmask;	/* saved interrupt mask			*/
 typedef	int32	ibid32;		/* index block ID (used in file system)	*/
 typedef	int32	dbid32;		/* data block ID (used in file system)	*/
-
+typedef uint32	mutex_t;
 /* Function declaration return types */
 
 typedef int32	syscall;	/* system call declaration		*/
@@ -41,7 +41,7 @@ typedef	int32	status;		/* returned status value (OK/SYSERR)	*/
 /* AGING POLICY - Use aging policy by setting AGING to TRUE or FALSE*/
 #define AGING TRUE
 
-/* Define Quantum for use in timer */
+/* Define Quantum for use in timer (Should this be *(.001)?) */
 #define QUANTUM 10
 
 /* Boolean constants */
