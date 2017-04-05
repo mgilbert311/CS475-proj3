@@ -1,5 +1,6 @@
 /*  main.c  - main */
-
+/*
+//Do we erase this?
 #include <xinu.h>
 #include <stdio.h>
 
@@ -22,3 +23,4 @@ int main(uint32 argc, uint32 *argv)
 
     return 0;
 }
+*/

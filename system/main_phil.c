@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define N 5	//number of philosophers and forks
+#define N 5	//number of philosophers and forks, should be arbitary
 
 //TODO - locks must be declared and initialized here
 
