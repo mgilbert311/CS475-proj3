@@ -9,9 +9,10 @@
 #define RAND_MAX 100
 //TODO - locks must be declared and initialized here, locked at the start
 
-mutex_t leftFork[N];
-mutex_t rightFork[N];
+mutex_t forks[N];
+//mutex_t rightFork[N];
 mutex_t critSec = 0;
+mutex_t talk = FALSE;
 //mutex_t *leftFork = (mutex_t*)malloc(sizeof(mutex_t)*N);
 //mutex_t *rightFork = (mutex_t*)malloc(sizeof(mutex_t)*N);
 
@@ -63,34 +64,40 @@ void	philosopher(uint32 phil_id)
 		mutex_lock(&critSec); //May not need this 
 
 		if((rand() % RAND_MAX) > 30 ){	//think 70% of the time
-
+			mutex_lock(&talk); //May not need this 
 			kprintf("Philosopher %u thinking: zzzzzzz \n", phil_id);
+			mutex_unlock(&talk); //U
 			think();
 		}else{		//eat 30% of the time
 			//acquire the forks
-			if(leftFork[left] == FALSE){ //Lock is open
-				//kprintf("Acquired left fork\n");
-				mutex_lock(&leftFork[left]);
+			if(forks[left] == FALSE){ //Lock is open
+				kprintf("Acquired left fork\n");
+				mutex_lock(&forks[left]);
 			}
 			//Try to acquire other fork
-			if(rightFork[right] == TRUE){ //Right is locked
+			if(forks[right] == TRUE){ //Right is locked
 				//Busy, drop forks
-				//kprintf("Couldn't acquire other fork\n");
-				mutex_unlock(&leftFork[left]);
+				kprintf("Couldn't acquire other fork\n");
+				mutex_unlock(&forks[left]);
 				//continue; //Make decision again
 			}
-			if(leftFork[left] == TRUE && rightFork[right] == FALSE){ //Make sure the other is available and that the left Fork is taken
-				//kprintf("Acquiring forks\n");
+			if(forks[left] == TRUE && forks[right] == FALSE){ 
+			//Make sure the other is available and that the left Fork is taken
+				kprintf("Acquiring forks\n");
 				//Left lock is already taken
-				mutex_lock(&rightFork[right]);
+				mutex_lock(&forks[right]);
+				mutex_lock(&talk); //May not need this 
+
 				kprintf("Philosopher %u eating: MMMMMMM \n", phil_id); 
+				mutex_unlock(&talk); //U
+
 				eat();
-				mutex_unlock(&leftFork[left]);
-				mutex_unlock(&rightFork[right]);
+				mutex_unlock(&forks[left]);
+				mutex_unlock(&forks[right]);
 			}
 			//kprintf("Just unlocked critSec\n");
 		}
-			mutex_unlock(&critSec); //U
+			mutex_unlock(&critSec); //May not need this 
 
 	}
 }
