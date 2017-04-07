@@ -9,6 +9,7 @@ void mutex_lock(mutex_t *lock)
 	//TODO - write a busy-wait loop using test_and_set
 	while(test_and_set(lock) == 1){		//Busy wait
 	}
+	//lock = 1;
 }
 
 
