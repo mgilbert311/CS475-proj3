@@ -56,9 +56,11 @@ void	philosopher(uint32 phil_id)
 	uint32 left = phil_id;			//TODO - right fork
 	uint32 right = phil_id % N;	//TODO - left fork
 	//time_t t;
+	srand(phil_id);
+
 	while (TRUE)
 	{
-		srand(phil_id);
+		mutex_lock(&critSec); //May not need this 
 
 		if((rand() % RAND_MAX) > 30 ){	//think 70% of the time
 
@@ -66,7 +68,6 @@ void	philosopher(uint32 phil_id)
 			think();
 		}else{		//eat 30% of the time
 			//acquire the forks
-			mutex_lock(&critSec); //May not need this 
 			if(leftFork[left] == FALSE){ //Lock is open
 				//kprintf("Acquired left fork\n");
 				mutex_lock(&leftFork[left]);
@@ -87,9 +88,10 @@ void	philosopher(uint32 phil_id)
 				mutex_unlock(&leftFork[left]);
 				mutex_unlock(&rightFork[right]);
 			}
-			kprintf("Just unlocked critSec\n");
-			mutex_unlock(&critSec); //U
+			//kprintf("Just unlocked critSec\n");
 		}
+			mutex_unlock(&critSec); //U
+
 	}
 }
 
