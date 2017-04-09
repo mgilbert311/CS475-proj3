@@ -5,7 +5,6 @@
  * test_and_set: assume it's called with test_and_set(&lock);
  * @param lock pointer to a mutex_t variable
  *
- * TODO - add a comment each line describing its action
  */
 test_and_set:
 	pushl	%ebx		# preserve contents of the %ebx register, which is about to be modified
