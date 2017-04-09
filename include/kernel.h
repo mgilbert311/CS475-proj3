@@ -42,7 +42,7 @@ typedef	int32	status;		/* returned status value (OK/SYSERR)	*/
 #define AGING TRUE
 
 /* Define Quantum for use in timer (Should this be *(.001)?)  was 10 */
-#define QUANTUM 2
+#define QUANTUM 10
 
 /* Boolean constants */
 
